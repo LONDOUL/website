@@ -1,0 +1,110 @@
+{% load static %}
+
+<!-- START CONTAINER -->
+  <div class="page-container row-fluid container-fluid">
+
+    <!-- SIDEBAR - START -->
+    <div class="page-sidebar pagescroll">
+
+      <!-- MAIN MENU - START -->
+      <div class="page-sidebar-wrapper" id="main-menu-wrapper">
+
+        <!-- USER INFO - START -->
+        <div class="profile-info row">
+
+          <div class="profile-image col-xs-4">
+            <a href="ui-profile.html">
+              <img alt="" src="{% static 'data/profile/profile.jpg' %}" class="img-responsive img-circle">
+            </a>
+          </div>
+
+          <div class="profile-details col-xs-8">
+
+            <h3>
+              <a href="ui-profile.html">Shane Taylor</a>
+
+              <!-- Available statuses: online, idle, busy, away and offline -->
+              <span class="profile-status online"></span>
+            </h3>
+
+            <p class="profile-title">Web Developer</p>
+
+          </div>
+
+        </div>
+        <!-- USER INFO - END -->
+
+
+
+        <ul class='wraplist'>
+
+          <li class='menusection'>Main</li>
+          <li class="">
+            <a href="index.html">
+              <i class="fa fa-dashboard"></i>
+              <span class="title">Dashboard</span>
+            </a>
+          </li>
+          <li class='menusection'>Applications</li>
+          <li class="">
+            <a href="ui-calendar.html">
+              <i class="fa fa-calendar"></i>
+              <span class="title">Calendar</span>
+            </a>
+          </li>
+          <li class="">
+            <a href="javascript:;">
+              <i class="fa fa-envelope"></i>
+              <span class="title">Mailbox</span>
+              <span class="arrow "></span><span class="label label-accent">4</span>
+            </a>
+            <ul class="sub-menu" >
+              <li>
+                <a class="" href="mail-inbox.html" >Inbox</a>
+              </li>
+              <li>
+                <a class="" href="mail-compose.html" >Compose</a>
+              </li>
+              <li>
+                <a class="" href="mail-view.html" >View</a>
+              </li>
+            </ul>
+          </li>
+          <li class="">
+            <a href="javascript:;">
+              <i class="fa fa-comments"></i>
+              <span class="title">Chat API</span>
+              <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu" >
+              <li>
+                <a class="" href="chat-api.html" >Chat API</a>
+              </li>
+              <li>
+                <a class="" href="chat-windows.html" >Chat Windows</a>
+              </li>
+            </ul>
+          </li>
+          <li class="">
+            <a href="javascript:;">
+              <i class="fa fa-envelope"></i>
+              <span class="title">Widgets</span>
+              <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu" >
+              <li>
+                <a class="" href="widget-misc.html" >Miscellaneous</a>
+              </li>
+              <li>
+                <a class="" href="widget-tiles-counter.html" >Counter Tiles</a>
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+
+      </div>
+      <!-- MAIN MENU - END -->
+
+    </div>
+    <!--  SIDEBAR - END -->

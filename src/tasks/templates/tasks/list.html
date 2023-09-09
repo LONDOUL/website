@@ -1,0 +1,258 @@
+
+{% extends 'student/base.html' %}
+
+{% block page_title %}TÂCHES{% endblock %}
+
+{% block content %}
+<header class="panel_header">
+      <h2 class="title pull-left">{% block title %}Liste{% endblock %}</h2>
+      <div class="actions panel_actions pull-right">
+        <a class="box_toggle fa fa-chevron-down"></a>
+        <a class="box_setting fa fa-cog" data-toggle="modal" href="tables-data.html#section-settings"></a>
+        <a class="box_close fa fa-times"></a>
+      </div>
+</header>
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+
+<style>
+
+    /* Styles pour les messages de succès */
+.success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Styles pour les messages d'erreur */
+.error {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Styles pour les messages d'information */
+.info {
+    background-color: #2196F3;
+    color: white;
+}
+
+/* Styles pour les messages d'avertissement */
+.warning {
+    background-color: #ff9800;
+    color: white;
+}
+
+/* Animation pour les messages flash */
+.messages li {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.messages li.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+</style>
+
+
+    <div class="modal-body" style="padding:20px;">
+
+      <div class="row">
+
+        <div class="col-md-12">
+
+          <ul class="nav nav-tabs primary">
+            <li class="active">
+              <a href="#info_1" data-toggle="tab">
+                <i class="fa fa-home"></i>Filtre
+              </a>
+            </li>
+          </ul>
+
+          <div class="tab-content primary">
+
+            <div class="tab-pane fade in active" id="info_1">
+
+              <form method="get"  enctype="multipart/form-data">
+                  {% csrf_token %}
+
+                <div class="row" style="margin:0px;padding:0px;">
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label class="form-label" for="{{ form.start_date.id_for_label }}">Statut :</label>
+                      <span class="desc"></span>
+                      <div class="controls">
+                       <select class="form-control" id="{{ form.status.id_for_label }}" name="{{ form.status.name }}">
+                            <option value="" {% if not form.status.value %}selected{% endif %}>Tous</option>
+                            <option value="completed" {% if form.status.value == "completed" %}selected{% endif %}>Terminé</option>
+                            <option value="not_completed" {% if form.status.value == "not_completed" %}selected{% endif %}>Non terminé</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label class="form-label" for="{{ form.start_date.id_for_label }}">Date de début :</label>
+                      <span class="desc"></span>
+                      <div class="controls">
+                        <input type="date" class="form-control" id="{{ form.start_date.id_for_label }}" name="{{ form.start_date.name }}" value="{{ form.start_date.value }}" placeholder="Date de début">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label class="form-label" for="{{ form.end_date.id_for_label }}">Date de fin :</label>
+                      <span class="desc"></span>
+                      <div class="controls">
+                        <input type="date" class="form-control form_date" id="{{ form.end_date.id_for_label }}" name="{{ form.end_date.name }}" value="{{ form.end_date.value }}" placeholder="Date de fin">
+                      </div>
+                    </div>
+                  </div>
+
+                  <input type="submit" value="Cliquer pour filtrer" class="col-md-3 btn btn-primary" style="margin-top:3%;" name="submit_office" id="submit_office">
+
+                </div>
+              </form>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <br>
+
+  <div class="content-body">
+      <div class="row">
+        <div class="col-xs-12">
+
+          <table id="example" class="display table table-hover table-condensed examplex">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Titre</th>
+                  <th>Description</th>
+                  <th>Date Création</th>
+<!--                  <th>Utilisateur</th>-->
+                  <th>Statut</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody>
+              {% for task in tasks %}
+                <tr>
+                  <td>{{ task.id }}</td>
+                  <td>{{ task.title }}</td>
+                  <td>{{ task.description }}</td>
+                  <td>{{ task.created_date|date:"d/m/Y" }}</td>
+<!--                  <td>{{ task.user.username }}</td>-->
+                  <td>{% if task.completed %}
+                      <span class="label label-success">Terminé</span>{% else %}
+                      <span class="label label-danger">Non terminé{% endif %}</span>
+                  </td>
+                  <td>
+                      <span>
+                        <a href="#" class="delete-task" data-confirm="Voulez-vous vraiment supprimer cette tâche ?" data-url="{% url 'task-delete' task.id %}">
+                            <span class="glyphicon glyphicon-trash" style="color:red;"></span>
+                        </a>
+                    </span>
+                      &ensp;&ensp;&ensp;
+                    <span data-toggle="tooltip" data-original-title="">
+                        <a href="{% url 'task-update' task.id %}">
+                        <span class="glyphicon glyphicon-pencil" style="color:green;"></span>
+                        </a>&nbsp;&nbsp;&nbsp;
+                    </span>
+                  </td>
+
+                </tr>
+              {% endfor %}
+              </tbody>
+
+              <tfoot>
+                <tr>
+                  <th>ID</th>
+                  <th>Titre</th>
+                  <th>Description</th>
+                  <th>Date Création</th>
+<!--                  <th>Utilisateur</th>-->
+                  <th>Statut</th>
+                  <th>Action</th>
+                </tr>
+              </tfoot>
+
+        </table>
+
+        <div class="box-footer" style="margin-top:0px;">
+              <div class="pull-left" style="margin-top:0px;">
+                <a style="color:white;" href="{% url 'export-csv' %}?status={{ request.GET.status }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}" target="_blank">
+                  <button class="btn btn-success"  data-toggle="tooltip" title="">
+                    <i class="glyphicon glyphicon-export"></i>
+                    CSV
+                  </button>
+                </a>
+                &nbsp;&nbsp;&nbsp;
+                <a style="color:white;" href="{% url 'export-json' %}?status={{ request.GET.status }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}" target="_blank">
+                  <button class="btn btn-success" data-toggle="tooltip" title="">
+                    <i class="glyphicon glyphicon-export"></i>
+                    JSON
+                  </button>
+                </a>
+              </div>
+
+              <div class="pull-right" style="margin-top:0px;">
+                <a style="color:white;" href="{{ 'task/create/' }}">
+                  <button class="btn btn-success" data-toggle="tooltip" title="">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    Nouveau
+                  </button>
+                </a>
+              </div>
+            </div>
+
+      </div>
+    </div>
+  </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteLinks = document.querySelectorAll('.delete-task');
+
+        deleteLinks.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                const confirmMessage = link.getAttribute('data-confirm');
+                const deleteUrl = link.getAttribute('data-url');
+
+                if (confirm(confirmMessage)) {
+                    window.location.href = deleteUrl;
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#date-picker').datetimepicker({
+            format: 'YYYY-MM-DD',  // Le format de date que vous souhaitez utiliser
+        });
+    });
+</script>
+
+{% endblock %}

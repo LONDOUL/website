@@ -1,0 +1,25 @@
+
+{% extends 'student/base.html' %}
+
+{% block content %}
+ <div class="container">
+    {% if responsable %}
+        Bonjour {{ nom }}<br><br>
+        Les notes :
+        <ol>
+             {% for key, value in notes.items %}
+            <li>{{ key }}: {{ value }}</li>
+            {% endfor %}
+        </ol>
+        La liste des cours :
+        <ul>
+            {% for cour in cours %}
+            <li>{{ cour }}</li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+        Bonjour étudiant
+    {% endif %}
+ </div>
+{% endblock %}

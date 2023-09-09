@@ -1,0 +1,101 @@
+
+{% extends 'student/base.html' %}
+
+{% block page_title %}Étudiants{% endblock %}
+
+{% block content %}
+<header class="panel_header">
+      <h2 class="title pull-left">{% block title %}Liste{% endblock %}</h2>
+      <div class="actions panel_actions pull-right">
+        <a class="box_toggle fa fa-chevron-down"></a>
+        <a class="box_setting fa fa-cog" data-toggle="modal" href="tables-data.html#section-settings"></a>
+        <a class="box_close fa fa-times"></a>
+      </div>
+</header>
+  <div class="content-body">
+      <div class="row">
+        <div class="col-xs-12">
+          <table id="example" class="display table table-hover table-condensed examplex">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nom(s)</th>
+                  <th>Prénom(s)</th>
+                  <th>Classe</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody>
+              {% for student in students %}
+                <tr>
+                  <td>{{ student.id }}</td>
+                  <td>{{ student.lastname }}</td>
+                  <td>{{ student.firstname }}</td>
+                  <td>{{ student.classe }}</td>
+                  <td>
+                      <span data-toggle="tooltip" data-original-title=""
+                        onclick="
+                      document.deleting_one_id.id.value ='';
+                      document.deleting_one_id.module.value = 'legal_status';
+                      document.deleting_one_id.smodule.value = '';
+                      document.deleting_one_id.back.value ='list';
+                      document.deleting_one_id.action.value ='delete';"
+                        <a href="#m_deleting_one_id" data-toggle="modal" data-backdrop="true"><span class="glyphicon glyphicon-trash" style="color:red;"></span></a>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
+                    <span data-toggle="tooltip" data-original-title="">
+                        <?php echo '
+                        <a href="">
+                        <span class="glyphicon glyphicon-pencil" style="color:green;"></span>
+                        </a>&nbsp;&nbsp;&nbsp;
+                    </span>
+                  </td>
+
+                </tr>
+              {% endfor %}
+              </tbody>
+
+              <tfoot>
+                <tr>
+                  <th>ID</th>
+                  <th>Nom(s)</th>
+                  <th>Prénom(s)</th>
+                  <th>Classe</th>
+                  <th>Action</th>
+                </tr>
+              </tfoot>
+
+        </table>
+
+        <div class="box-footer" style="margin-top:0px;">
+              <div class="pull-left" style="margin-top:0px;">
+                <a style="color:white;" href="#" target="_blank">
+                  <button class="btn btn-success"  data-toggle="tooltip" title="">
+                    <i class="glyphicon glyphicon-print"></i>
+                    PDF
+                  </button>
+                </a>
+                &nbsp;&nbsp;&nbsp;
+                <a style="color:white;" href="#" target="_blank">
+                  <button class="btn btn-success" data-toggle="tooltip" title="">
+                    <i class="glyphicon glyphicon-export"></i>
+                    Excel
+                  </button>
+                </a>
+              </div>
+
+              <div class="pull-right" style="margin-top:0px;">
+                <a style="color:white;" href="#">
+                  <button class="btn btn-success" data-toggle="tooltip" title="">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    Nouveau
+                  </button>
+                </a>
+              </div>
+            </div>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}

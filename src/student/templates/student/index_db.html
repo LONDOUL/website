@@ -1,0 +1,13 @@
+
+{% extends 'student/base.html' %}
+
+{% block content %}
+<h1 class="title" ><a href="{% url 'students-news' %}">Gestion des étudiants</a><</h1><br><br>
+
+  <div class="container">
+      <h2>Nom(s) de l'étudiant : <span class="infos_student" >{{ student.lastname }}</span>
+          | Prénom(s) de l'étudiant : <span class="infos_student" >{{ student.firstname }}</span>
+          | Classe de l'étudiant : <span class="infos_student" >{{ student.classe }}</span>
+      </h2>
+  </div>
+{% endblock %}

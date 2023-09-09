@@ -1,0 +1,65 @@
+{% extends 'student/base.html' %}
+
+{% block page_title %}TÂCHES{% endblock %}
+
+{% block content %}
+  <div class="col-lg-12">
+  <section class="box ">
+    <header class="panel_header">
+      <h2 class="title pull-left">Modification</h2>
+      <div class="actions panel_actions pull-right">
+        <a class="box_toggle fa fa-chevron-down"></a>
+        <a class="box_setting fa fa-cog" data-toggle="modal" href="#"></a>
+        <a class="box_close fa fa-times"></a>
+      </div>
+    </header>
+
+    <div class="content-body">
+      <div class="row">
+
+  <form method="post">
+    {% csrf_token %}
+
+  <!-- Personnalisez les champs individuels ici -->
+  <div class="form-group">
+    <label for="{{ form.title.id_for_label }}">Titre :</label>
+    <span class="desc"></span>
+      <div class="controls">
+        <input type="text" class="form-control custom-css-class" id="{{ form.title.id_for_label }}" name="{{ form.title.name }}" value="{{ form.title.value }}" placeholder="Entrez le titre ici" required>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="{{ form.description.id_for_label }}">Description :</label>
+    <span class="desc"></span>
+      <div class="controls">
+        <textarea class="form-control" id="{{ form.description.id_for_label }}" name="{{ form.description.name }}" placeholder="Entrez la description ici" required>{{ form.description.value }}</textarea>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="{{ form.created_date.id_for_label }}">Date de création :</label>
+    <span class="desc"></span>
+      <div class="controls">
+        <input type="date" value="{{ form.created_date.value|date:'Y-m-d' }}" class="form-control" id="{{ form.created_date.id_for_label }}" name="{{ form.created_date.name }}" >
+      </div>
+  </div>
+
+  <div class="form-group">
+      <label for="{{ form.completed.id_for_label }}">Statut :</label>
+      <select class="form-control" id="{{ form.completed.id_for_label }}" name="{{ form.completed.name }}">
+        <option value="0" {% if form.completed.value == False %}selected{% endif %}>Non terminé</option>
+        <option value="1" {% if form.completed.value == True %}selected{% endif %}>Terminé</option>
+      </select>
+    </div>
+
+    <input type="submit" name="Add" id="Add" class="btn btn-accent btn-block" value="Mise à jour" />
+  </form>
+  <br>
+
+    </div>
+        <div class="clearfix"><br></div>
+    </div>
+  </section>
+  </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Title</title>
+</head>
+<body>
+{% include 'student/header.html' %}
+    {% if responsable %}
+        Bonjour {{ nom }}<br><br>
+        Les notes :
+        <ol>
+             {% for key, value in notes.items %}
+            <li>{{ key }}: {{ value }}</li>
+            {% endfor %}
+        </ol>
+        La liste des cours :
+        <ul>
+            {% for cour in cours %}
+            <li>{{ cour }}</li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+        Bonjour étudiant
+    {% endif %}
+{% include 'student/footer.html' %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des étudiants</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<h1 class="title" ><a href="{% url 'students' %}">Gestion des étudiants</a></h1><br><br>
+
+  <div class="container">
+      <h2>Nom(s) de l'étudiant : <span class="infos_student" >{{ student.lastname }}</span>
+          | Prénom(s) de l'étudiant : <span class="infos_student" >{{ student.firstname }}</span>
+          | Classe de l'étudiant : <span class="infos_student" >{{ student.classe }}</span>
+      </h2>
+      <br><br>
+      <h2>En JSON <br><br>{{ students_json }}</h2>
+
+  </div>
+</body>
+</html>

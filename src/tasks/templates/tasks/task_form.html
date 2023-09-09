@@ -1,0 +1,56 @@
+{% extends 'student/base.html' %}
+
+{% block page_title %}TÂCHES{% endblock %}
+
+{% block content %}
+  <div class="col-lg-12">
+  <section class="box ">
+    <header class="panel_header">
+      <h2 class="title pull-left">Nouveau</h2>
+      <div class="actions panel_actions pull-right">
+        <a class="box_toggle fa fa-chevron-down"></a>
+        <a class="box_setting fa fa-cog" data-toggle="modal" href="#"></a>
+        <a class="box_close fa fa-times"></a>
+      </div>
+    </header>
+
+    <div class="content-body">
+      <div class="row">
+
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="{{ form.title.id_for_label }}">Titre :</label>
+      <span class="desc"></span>
+      <div class="controls">
+        <input type="text" class="form-control custom-css-class" id="{{ form.title.id_for_label }}" name="{{ form.title.name }}" placeholder="Entrez le titre ici" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.description.id_for_label }}">Description :</label>
+      <span class="desc"></span>
+      <div class="controls">
+        <textarea rows="3" class="form-control" id="{{ form.description.id_for_label }}" name="{{ form.description.name }}" placeholder="Entrez la description ici" required></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.created_date.id_for_label }}">Date de création :</label>
+      <span class="desc"></span>
+      <div class="controls">
+        <input type="date" class="form-control custom-css-class" id="{{ form.created_date.id_for_label }}" name="{{ form.created_date.name }}" placeholder="Entrez la date de création ici" required>
+      </div>
+    </div>
+
+    <input type="submit" name="Add" id="Add" class="btn btn-accent btn-block" value="Ajouter" />
+  </form>
+  <br>
+
+    </div>
+        <div class="clearfix"><br></div>
+    </div>
+  </section>
+  </div>
+{% endblock %}

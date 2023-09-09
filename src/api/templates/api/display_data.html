@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Affichage des données</title>
+</head>
+<body>
+    <h1>Affichage des données de la base de données</h1>
+    <ul>
+        {% for planet in planets %}
+            <li>
+                <strong>Nom :</strong> {{ planet.name }}<br>
+                <strong>Période de rotation :</strong> {{ planet.rotation_period }}<br>
+                <strong>Période orbitale :</strong> {{ planet.orbital_period }}<br>
+                <strong>Diamtètre :</strong> {{ planet.diameter }}<br>
+                <strong>Population :</strong> {{ planet.population }}<br>
+                <br>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
